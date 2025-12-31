@@ -2,6 +2,9 @@
 
 A stable, monolithic, 32-bit operating system kernel written in C and Assembly.
 
+
+![MicroOS Demo](main.mov)
+
 ## Features
 - **Monolithic Kernel**: All drivers (VGA, Keyboard, FS) are embedded for maximum stability.
 - **Stack-Based Memory**: Uses stack memory for filesystem and buffers to prevent memory corruption.
