@@ -3,7 +3,11 @@
 A stable, monolithic, 32-bit operating system kernel written in C and Assembly.
 
 
-![MicroOS Demo](main.mov)
+
+
+https://github.com/user-attachments/assets/d90169d0-d8de-4fa8-a32f-3d9a137a0e3c
+
+
 
 ## Features
 - **Monolithic Kernel**: All drivers (VGA, Keyboard, FS) are embedded for maximum stability.
