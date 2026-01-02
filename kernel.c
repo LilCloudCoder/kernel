@@ -195,8 +195,7 @@ void k_print_syntax(const char *s, int *x, int *y) {
 }
 
 // Known commands list for autocorrect
-const char *known_cmds[] = {"ls",    "touch", "cat",  "echo",
-                            "clear", "color", "edit", "help"};
+const char *known_cmds[] = {"ls", "touch", "cat", "echo", "clear", "edit", "help"};
 
 void k_exec_command(char *buf, int *x, int *y, int color, File *fs) {
   char *argv[8];
@@ -369,7 +368,7 @@ void k_exec_command(char *buf, int *x, int *y, int color, File *fs) {
     k_putc('\n', x, y, color);
     int best_dist = 100;
     const char *best_match = 0;
-    for (int k = 0; k < 8; k++) {
+    for (int k = 0; k < 7; k++) {
       int d = levenshtein(cmd, known_cmds[k]);
       if (d < best_dist) {
         best_dist = d;
@@ -394,7 +393,7 @@ void kernel_main(void) {
   update_cursor(0, 0);
 
   k_print("MicroOS v1.0 \n", &x, &y, 0x0E);
-  k_print("Commands: ls [-a], touch, echo, cat, clear, color\n", &x, &y, 0x07);
+  k_print("Commands: ls [-a], touch, echo, cat, clear, edit\n", &x, &y, 0x07);
   k_print("$ ", &x, &y, 0x0A);
 
   char buf[128];
@@ -452,12 +451,10 @@ void kernel_main(void) {
 
             char *cmd_part = buf;
             char *file_part = 0;
-            int append = 0;
 
             if (redirect_idx != -1) {
               buf[redirect_idx] = 0; // split
               if (buf[redirect_idx + 1] == '>') {
-                append = 1;
                 file_part = &buf[redirect_idx + 2];
               } else
                 file_part = &buf[redirect_idx + 1];
@@ -468,22 +465,7 @@ void kernel_main(void) {
             }
 
             if (file_part) {
-              // Redirection handler
-              char fname[12] = {0};
-              int fi = 0;
-              while (file_part[fi] && file_part[fi] != ' ' && fi < 11) {
-                fname[fi] = file_part[fi];
-                fi++;
-              }
-
-              // Buffer the output of command?
-              // That's hard without buffering k_print.
-              // For now, let's just run the command normally because we can't
-              // easily capture output in this architecture. Retaining old logic
-              // for >> is hard with the new exec structure without a "Virtual
-              // Console". I will LIMIT redirection to just `echo` for now or
-              // leave it unimplemented in favor of `edit`. User didn't strictly
-              // ask for > support fix, but I should probably keep it if I can.
+              // Redirection logic disabled in favor of editor
               k_print("Redirection not supported in new shell (use edit)\n", &x,
                       &y, 0x08);
             } else {
