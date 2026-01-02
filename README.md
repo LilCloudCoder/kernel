@@ -5,7 +5,11 @@ A stable, monolithic, 32-bit operating system kernel written in C and Assembly.
 
 
 
-https://github.com/user-attachments/assets/d90169d0-d8de-4fa8-a32f-3d9a137a0e3c
+
+
+https://github.com/user-attachments/assets/d8dd1a36-470f-492b-b910-d0f7ab49d4aa
+
+
 
 
 
